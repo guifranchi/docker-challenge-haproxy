@@ -1,0 +1,45 @@
+version: '3'
+services:
+    haproxy:
+        container_name: lb
+        environment:
+            - CERTS=example.com
+            - EMAIL=none@nothing.com
+            - STAGING=true
+        volumes:
+            - '$PWD/data/letsencrypt:/etc/letsencrypt'
+            - '$PWD/data/haproxy.cfg:/etc/haproxy/haproxy.cfg'
+        networks:
+            - alyantNet
+        ports:
+            - '80:80'
+            - '443:443'
+        image: 'docker-haproxy-certbot:latest'
+    rsyslog:
+        container_name: rsyslog
+        environment:
+            - TZ=UTC
+        volumes:
+            - '$PWD/data/rsyslog/config:/config'
+        networks:
+            - alyantNet
+        ports:
+            - '514:514'
+        image: 'rsyslog/syslog_appliance_alpine'
+    back01:
+        container_name: lorem-ipsum-01
+        networks:
+            - alyantNet
+        image: 'alyant-lorem-ipsum:latest'
+    back02:
+        container_name: lorem-ipsum-02
+        networks:
+            - alyantNet
+        image: 'alyant-lorem-ipsum:latest'
+    back03:
+        container_name: lorem-ipsum-03
+        networks:
+            - alyantNet
+        image: 'alyant-lorem-ipsum:latest'
+networks:
+  alyantNet:

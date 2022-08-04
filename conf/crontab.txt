@@ -1,0 +1,6 @@
+MAILTO=""
+SHELL=/bin/bash
+BASH_ENV=/container.env
+
+# Execute the cert-renewal script every Sunday at 01:01 AM
+01 01 * * 7 /cert-renewal-haproxy.sh > /proc/1/fd/1 2>&1
