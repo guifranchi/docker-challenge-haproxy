@@ -1,4 +1,4 @@
-# Dockerized HAProxy with Let's Encrypt automatic certificate - Allyant Challenge
+# Dockerized HAProxy with Let's Encrypt automatic certificate
 
 This container provides an HAProxy instance with Let's Encrypt certificates generated
 at startup, as well as renewed (if necessary) once a week with an internal cron job.
@@ -23,7 +23,7 @@ Example of run command (replace CERTS,EMAIL values and volume paths with yours)
 
 ```
 docker run --name lb -d \
-    -e CERTS=my.domain,my.other.domain \
+    -e CERTS=my.domain \
     -e EMAIL=my.email@my.domain \
     -e STAGING=true \
     -v '$PWD/data/letsencrypt:/etc/letsencrypt' \
@@ -45,8 +45,8 @@ services:
     haproxy:
         container_name: lb
         environment:
-            - CERTS=example.com
-            - EMAIL=none@nothing.com
+            - CERTS=mydomain.com
+            - EMAIL=my.email@my.domain
             - STAGING=true
         volumes:
             - '$PWD/data/letsencrypt:/etc/letsencrypt'
