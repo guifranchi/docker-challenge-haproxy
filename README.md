@@ -1,4 +1,4 @@
-# Dockerized HAProxy with Let's Encrypt automatic certificate
+# Dockerized HAProxy with Let's Encrypt automatic certificates
 
 This container provides an HAProxy instance with Let's Encrypt certificates generated
 at startup, as well as renewed (if necessary) once a week with an internal cron job.
